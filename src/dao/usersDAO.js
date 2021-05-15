@@ -94,7 +94,7 @@ export default class UsersDAO {
   }
 
   /**
-   * Removes a user from the `sessons` collection
+   * Removes a user from the `sessions` collection
    * @param {string} email - The email of the user to logout
    * @returns {DAOResponse} Returns either a "success" or an "error" Object
    */
