@@ -1,6 +1,7 @@
 const MongoClient = require("mongodb").MongoClient
 const ObjectId = require("mongodb").ObjectId
 const MongoError = require("mongodb").MongoError
+require("dotenv").config()
 
 /**
  * Ticket: Migration
@@ -12,17 +13,15 @@ const MongoError = require("mongodb").MongoError
  * Refer to http://mongodb.github.io/node-mongodb-native/3.1/tutorials/crud/#bulkwrite
  */
 
-// This leading semicolon (;) is to make this Immediately Invoked Function Expression (IIFE).
+// This leading semicolon (;) is to signify to the parser that this is a new expression. This expression is an
+// Immediately Invoked Function Expression (IIFE). It's being used to wrap this logic in an asynchronous function
+// so we can use await within.
 // To read more about this type of expression, refer to https://developer.mozilla.org/en-US/docs/Glossary/IIFE
 ;(async () => {
   try {
-    // ensure you update your host information below!
-    const host = "mongodb://<your atlas connection uri from your .env file"
-    const client = await MongoClient.connect(
-      host,
-      { useNewUrlParser: true },
-    )
-    const mflix = client.db("mflix")
+    const host = process.env.MFLIX_DB_URI
+    const client = await MongoClient.connect(host, { useNewUrlParser: true })
+    const mflix = client.db(process.env.MFLIX_NS)
 
     // TODO: Create the proper predicate and projection
     // add a predicate that checks that the `lastupdated` field exists, and then

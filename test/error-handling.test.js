@@ -2,7 +2,7 @@ import MoviesDAO from "../src/dao/moviesDAO"
 
 const badObjectId = "helloworld"
 
-describe("Get Comments", async () => {
+describe("Get Comments", () => {
   beforeAll(async () => {
     await MoviesDAO.injectDB(global.mflixClient)
   })

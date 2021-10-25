@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb"
 
 let theaters
-describe("Basic Updates", async () => {
+describe("Basic Updates", () => {
   /**
    * In this lesson, we'll discuss updating documents with the Node.js driver.
    * There are two different update operations we can perform - updateOne(), and

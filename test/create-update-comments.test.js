@@ -12,13 +12,13 @@ const newUser = {
   email: "baz@foobar.com",
 }
 
-// The Martian
-const movieId = "573a13eff29313caabdd82f3"
+// Interstellar
+const movieId = "573a13b9f29313caabd4ddff"
 
 const date = new Date()
 
 let comment = {
-  text: "fe-fi-fo-fum",
+  text: "fa-fe-fi-fo-fum",
   id: "",
 }
 
@@ -26,7 +26,7 @@ const newCommentText = "foo foo foo"
 
 const newerCommentText = "bar bar bar"
 
-describe("Create/Update Comments", async () => {
+describe("Create/Update Comments", () => {
   beforeAll(async () => {
     await CommentsDAO.injectDB(global.mflixClient)
     await MoviesDAO.injectDB(global.mflixClient)
@@ -34,10 +34,10 @@ describe("Create/Update Comments", async () => {
 
   afterAll(async () => {
     const commentsCollection = await global.mflixClient
-      .db("mflix")
+      .db(process.env.MFLIX_NS)
       .collection("comments")
-    const deleteResult = await commentsCollection.deleteOne({
-      _id: ObjectId(comment.id),
+    const deleteResult = await commentsCollection.deleteMany({
+      text: "fa-fe-fi-fo-fum",
     })
   })
 
@@ -52,10 +52,10 @@ describe("Create/Update Comments", async () => {
     expect(postCommentResult.insertedCount).toBe(1)
     expect(postCommentResult.insertedId).not.toBe(null)
 
-    const martianComments = (await MoviesDAO.getMovieByID(movieId)).comments
+    const movieComments = (await MoviesDAO.getMovieByID(movieId)).comments
 
-    expect(martianComments[0]._id).toEqual(postCommentResult.insertedId)
-    expect(martianComments[0].text).toEqual(comment.text)
+    expect(movieComments[0]._id).toEqual(postCommentResult.insertedId)
+    expect(movieComments[0].text).toEqual(comment.text)
 
     comment.id = postCommentResult.insertedId
   })
@@ -67,12 +67,11 @@ describe("Create/Update Comments", async () => {
       newCommentText,
       date,
     )
-
     expect(updateCommentResult.modifiedCount).toBe(1)
 
-    const martianComments = (await MoviesDAO.getMovieByID(movieId)).comments
+    const movieComments = (await MoviesDAO.getMovieByID(movieId)).comments
 
-    expect(martianComments[0].text).toBe(newCommentText)
+    expect(movieComments[0].text).toBe(newCommentText)
   })
 
   test("Can only update comment if user posted comment", async () => {

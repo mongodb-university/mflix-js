@@ -3,5 +3,5 @@
 # Do not surround the URI with quotes
 SECRET_KEY=super_secret_key_you_should_change
 MFLIX_DB_URI=mongodb+srv://m220student:m220password@<your-atlas-cluster-address>
-MFLIX_NS=mflix
+MFLIX_NS=sample_mflix
 PORT=5000

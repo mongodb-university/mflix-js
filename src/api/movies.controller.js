@@ -15,10 +15,9 @@ export default class MoviesController {
   }
 
   static async apiGetMoviesByCountry(req, res, next) {
-    let countries = Array.isArray(req.query.countries)
-      ? req.query.countries
-      : Array(req.query.countries)
-    let moviesList = await MoviesDAO.getMoviesByCountry(countries)
+    let countries = req.query.countries == "" ? "USA" : req.query.countries
+    let countryList = Array.isArray(countries) ? countries : Array(countries)
+    let moviesList = await MoviesDAO.getMoviesByCountry(countryList)
     let response = {
       titles: moviesList,
     }
@@ -61,13 +60,19 @@ export default class MoviesController {
 
     switch (searchType) {
       case "genre":
-        filters.genre = req.query.genre
+        if (req.query.genre !== "") {
+          filters.genre = req.query.genre
+        }
         break
       case "cast":
-        filters.cast = req.query.cast
+        if (req.query.cast !== "") {
+          filters.cast = req.query.cast
+        }
         break
       case "text":
-        filters.text = req.query.text
+        if (req.query.text !== "") {
+          filters.text = req.query.text
+        }
         break
       default:
       // nothing to do
@@ -101,11 +106,12 @@ export default class MoviesController {
       page = 0
     }
 
-    if (!req.query.cast) {
-      return this.apiSearchMovies(req, res, next)
-    }
+    let filters = {}
 
-    const filters = { cast: req.query.cast }
+    filters =
+      req.query.cast !== ""
+        ? { cast: new RegExp(req.query.cast, "i") }
+        : { cast: "Tom Hanks" }
 
     const facetedSearchResult = await MoviesDAO.facetedSearch({
       filters,

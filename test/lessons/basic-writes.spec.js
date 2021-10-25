@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb"
-describe("Basic Writes", async () => {
+describe("Basic Writes", () => {
   /**
    * In this lesson, we'll discuss how to perform write operations in MongoDB,
    * the "C" and "U" in Create, Read, Update, Delete

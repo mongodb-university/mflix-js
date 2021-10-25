@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb"
 
 let movies
-describe("Cursor Methods and Aggregation Equivalents", async () => {
+describe("Cursor Methods and Aggregation Equivalents", () => {
   /**
    * In this lesson, we'll discuss the methods we can call against MongoDB
    * cursors, and the aggregation stages that would perform the same tasks in a

@@ -1,6 +1,6 @@
 import MoviesDAO from "../src/dao/moviesDAO"
 
-describe("Text and Subfield Search", async () => {
+describe("Text and Subfield Search", () => {
   beforeAll(async () => {
     await MoviesDAO.injectDB(global.mflixClient)
   })
@@ -10,10 +10,10 @@ describe("Text and Subfield Search", async () => {
     const { moviesList, totalNumMovies } = await MoviesDAO.getMovies({
       filters,
     })
-    expect(moviesList.length).toEqual(9)
-    expect(totalNumMovies).toEqual(9)
+    expect(moviesList.length).toEqual(6)
+    expect(totalNumMovies).toEqual(6)
     const firstMovie = moviesList[0]
-    expect(firstMovie["title"]).toEqual("Flash Gordon Conquers the Universe")
+    expect(firstMovie["title"]).toEqual("Flash Gordon")
   })
 
   test("Can perform a genre search with one genre", async () => {
@@ -22,7 +22,7 @@ describe("Text and Subfield Search", async () => {
       filters,
     })
     expect(moviesList.length).toEqual(20)
-    expect(totalNumMovies).toEqual(5917)
+    expect(totalNumMovies).toEqual(2539)
     const firstMovie = moviesList[0]
     expect(firstMovie["title"]).toEqual("Gladiator")
   })
@@ -33,7 +33,7 @@ describe("Text and Subfield Search", async () => {
       filters,
     })
     expect(moviesList.length).toEqual(20)
-    expect(totalNumMovies).toEqual(7259)
+    expect(totalNumMovies).toEqual(3485)
     const firstMovie = moviesList[0]
     expect(firstMovie["title"]).toEqual("2 Fast 2 Furious")
   })
@@ -55,7 +55,7 @@ describe("Text and Subfield Search", async () => {
       filters,
     })
     expect(moviesList.length).toEqual(20)
-    expect(totalNumMovies).toEqual(74)
+    expect(totalNumMovies).toEqual(61)
     const lastMovie = moviesList.slice(-1).pop()
     expect(lastMovie["title"]).toEqual("Eat Pray Love")
   })
@@ -67,8 +67,8 @@ describe("Text and Subfield Search", async () => {
       moviesPerPage: 33,
     })
     expect(moviesList.length).toEqual(33)
-    expect(totalNumMovies).toEqual(74)
+    expect(totalNumMovies).toEqual(61)
     const lastMovie = moviesList.slice(-1).pop()
-    expect(lastMovie["title"]).toEqual("Something to Talk About")
+    expect(lastMovie["title"]).toEqual("Sneakers")
   })
 })
