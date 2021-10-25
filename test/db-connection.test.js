@@ -1,6 +1,6 @@
 import MoviesDAO from "../src/dao/moviesDAO"
 
-describe("Connection", async () => {
+describe("Connection", () => {
   beforeAll(async () => {
     await MoviesDAO.injectDB(global.mflixClient)
   })
@@ -26,6 +26,6 @@ describe("Connection", async () => {
       totalNumMovies: numMovies,
     } = await MoviesDAO.getMovies()
     expect(firstPage.length).toEqual(20)
-    expect(numMovies).toEqual(45993)
+    expect(numMovies).toEqual(23530)
   })
 })

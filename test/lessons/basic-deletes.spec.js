@@ -1,4 +1,4 @@
-describe("Basic Deletes", async () => {
+describe("Basic Deletes", () => {
   /**
    * In this lesson, we'll discuss how to perform delete operations in MongoDB.
    *

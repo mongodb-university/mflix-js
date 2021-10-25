@@ -1,6 +1,6 @@
 import MoviesDAO from "../src/dao/moviesDAO"
 
-describe("Facets", async () => {
+describe("Facets", () => {
   beforeAll(async () => {
     await MoviesDAO.injectDB(global.mflixClient)
   })
@@ -14,18 +14,18 @@ describe("Facets", async () => {
     const filters = { cast: { $in: ["Tom Hanks"] } }
     const actual = await MoviesDAO.facetedSearch({ filters })
     expect(actual.movies.length).toBe(20)
-    expect(actual.rating.length).toBe(4)
-    expect(actual.runtime.length).toBe(5)
-    expect(actual.count).toBe(51)
+    expect(actual.rating.length).toBe(5)
+    expect(actual.runtime.length).toBe(4)
+    expect(actual.count).toBe(37)
   })
 
   test("should also support paging", async () => {
     const filters = { cast: { $in: ["Susan Sarandon"] } }
-    const actual = await MoviesDAO.facetedSearch({ filters, page: 3 })
-    expect(actual.movies.length).toBe(3)
-    expect(actual.rating.length).toBe(1)
-    expect(actual.runtime.length).toBe(2)
-    expect(actual.count).toBe(63)
+    const actual = await MoviesDAO.facetedSearch({ filters, page: 1 })
+    expect(actual.movies.length).toBe(18)
+    expect(actual.rating.length).toBe(3)
+    expect(actual.runtime.length).toBe(4)
+    expect(actual.count).toBe(38)
   })
 
   test("should throw an error if castMembers is empty", async () => {

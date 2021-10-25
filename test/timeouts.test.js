@@ -1,6 +1,6 @@
 import MoviesDAO from "../src/dao/moviesDAO"
 
-describe("Timeouts", async () => {
+describe("Timeouts", () => {
   beforeAll(async () => {
     await MoviesDAO.injectDB(global.mflixClient)
   })

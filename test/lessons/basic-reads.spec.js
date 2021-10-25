@@ -1,4 +1,4 @@
-describe("Basic Reads", async () => {
+describe("Basic Reads", () => {
   /**
    * In this lesson, we'll discuss how to perform query operations in MongoDB,
    * the "R" in Create, Read, Update, Delete - or CRUD.

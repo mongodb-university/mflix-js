@@ -6,7 +6,7 @@ const testUser = {
   password: "foobar",
 }
 
-describe("User Preferences", async () => {
+describe("User Preferences", () => {
   beforeAll(async () => {
     await UsersDAO.injectDB(global.mflixClient)
   })

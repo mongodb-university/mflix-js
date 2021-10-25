@@ -1,6 +1,6 @@
 import MoviesDAO from "../src/dao/moviesDAO"
 
-describe("Connection Pooling", async () => {
+describe("Connection Pooling", () => {
   beforeAll(async () => {
     await MoviesDAO.injectDB(global.mflixClient)
   })

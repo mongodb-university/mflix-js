@@ -21,7 +21,7 @@ let comment = {
   id: "",
 }
 
-describe("Delete Comments", async () => {
+describe("Delete Comments", () => {
   beforeAll(async () => {
     await CommentsDAO.injectDB(global.mflixClient)
     await MoviesDAO.injectDB(global.mflixClient)

@@ -140,7 +140,7 @@ export default class MoviesDAO {
       throw new Error("Must specify cast members to filter by.")
     }
     const matchStage = { $match: filters }
-    const sortStage = { $sort: { "tomatoes.viewer.rating": -1 } }
+    const sortStage = { $sort: { "tomatoes.viewer.numReviews": -1 } }
     const countingPipeline = [matchStage, sortStage, { $count: "count" }]
     const skipStage = { $skip: moviesPerPage * page }
     const limitStage = { $limit: moviesPerPage }
@@ -296,9 +296,9 @@ export default class MoviesDAO {
       const pipeline = [
         {
           $match: {
-            _id: ObjectId(id),
-          },
-        },
+            _id: ObjectId(id)
+          }
+        }
       ]
       return await movies.aggregate(pipeline).next()
     } catch (e) {

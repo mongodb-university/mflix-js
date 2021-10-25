@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb"
 
-describe("MongoClient", async () => {
+describe("MongoClient", () => {
   /**
    * In this lesson, we'll use the MongoClient object to initiate a connection
    * with the database.
@@ -16,10 +16,9 @@ describe("MongoClient", async () => {
 
     let testClient
     try {
-      testClient = await MongoClient.connect(
-        process.env.MFLIX_DB_URI,
-        { useNewUrlParser: true },
-      )
+      testClient = await MongoClient.connect(process.env.MFLIX_DB_URI, {
+        useNewUrlParser: true,
+      })
       expect(testClient).not.toBeNull()
 
       // retrieve client options
@@ -52,10 +51,11 @@ describe("MongoClient", async () => {
 
     let testClient
     try {
-      testClient = await MongoClient.connect(
-        process.env.MFLIX_DB_URI,
-        { connectTimeoutMS: 200, retryWrites: true, useNewUrlParser: true },
-      )
+      testClient = await MongoClient.connect(process.env.MFLIX_DB_URI, {
+        connectTimeoutMS: 200,
+        retryWrites: true,
+        useNewUrlParser: true,
+      })
 
       const clientOptions = testClient.s.options
 
@@ -82,13 +82,12 @@ describe("MongoClient", async () => {
 
     let testClient
     try {
-      testClient = await MongoClient.connect(
-        process.env.MFLIX_DB_URI,
-        { useNewUrlParser: true },
-      )
+      testClient = await MongoClient.connect(process.env.MFLIX_DB_URI, {
+        useNewUrlParser: true,
+      })
 
       // create a database object for the "mflix" database
-      const mflixDB = testClient.db("mflix")
+      const mflixDB = testClient.db(process.env.MFLIX_NS)
 
       // make sure the "mflix" database has the correct collections
       const mflixCollections = await mflixDB.listCollections().toArray()
@@ -119,20 +118,21 @@ describe("MongoClient", async () => {
 
     let testClient
     try {
-      testClient = await MongoClient.connect(
-        process.env.MFLIX_DB_URI,
-        { connectTimeoutMS: 200, retryWrites: true, useNewUrlParser: true },
-      )
+      testClient = await MongoClient.connect(process.env.MFLIX_DB_URI, {
+        connectTimeoutMS: 200,
+        retryWrites: true,
+        useNewUrlParser: true,
+      })
 
       // create a database object for the "mflix" database
-      const mflixDB = testClient.db("mflix")
+      const mflixDB = testClient.db(process.env.MFLIX_NS)
 
       // create a collection object for the "movies" collection
       const movies = mflixDB.collection("movies")
 
       // expect the "movies" collection to have the correct number of movies
       const numMoves = await movies.countDocuments({})
-      expect(numMoves).toBe(45993)
+      expect(numMoves).toBe(23530)
     } catch (e) {
       expect(e).toBeNull()
     } finally {

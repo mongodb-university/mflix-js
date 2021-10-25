@@ -10,7 +10,7 @@ const sessionUser = {
   jwt: "hello",
 }
 
-describe("User Management", async () => {
+describe("User Management", () => {
   beforeAll(async () => {
     await UsersDAO.injectDB(global.mflixClient)
   })

@@ -1,4 +1,4 @@
-describe("Callbacks, Promises, and Aysnc/Await", async () => {
+describe("Callbacks, Promises, and Aysnc/Await", () => {
   /**
    * In this lesson, we'll discuss the difference between callbacks, promises,
    * and async/await in modern Javascript. We'll also discuss how the Node
